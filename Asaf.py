@@ -1,7 +1,7 @@
 import turtle
 turtle.tracer(1,0)
 
-x_size=800
+x_size=400
 y_size=700
 turtle.setup(x_size,y_size)
 SQUARE_SIZE=20
@@ -25,8 +25,8 @@ direction=LEFT
 
 UP_EDGE = 350
 DOWN_EDGE = -350
-RIGHT_EDGE = 400
-LEFT_EDGE = -400
+RIGHT_EDGE = 200
+LEFT_EDGE = -200
 
 def left():
     global direction
@@ -36,9 +36,6 @@ def left():
     farmer.goto(x-SQUARE_SIZE,y)
     print('you moved the farmer laft')
     print(farmer.pos())
-##    farmer_stamp_list.append(farmer.stamp())
-##    farmer_stamp_list.pop(0)
-##    print(farmer_stamp_list)
     
 def right():
     global direction
@@ -48,10 +45,7 @@ def right():
     farmer.goto(x+SQUARE_SIZE,y)
     print('you moved the farmer right')
     print(farmer.pos())
-##    farmer_stamp_list.append(farmer.stamp())
-##    farmer_stamp_list.pop(0)
-##    print(farmer_stamp_list)
-    
+
 turtle.onkeypress(left,LEFT_ARROW)
 turtle.onkeypress(right,RIGHT_ARROW)
 turtle.listen()
