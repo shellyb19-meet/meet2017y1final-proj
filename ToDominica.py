@@ -1,1 +1,4 @@
-food_list = [apple, banana, strawberry, orange, grape, mango, pear, pineapple, watermelon, lemon, carrot, potato, tomato, broccoli, cucumber, eggplant, bellpaper, pasta, sandwish, hamburger, bad_apple, bad_banana, bad_strawberry, bad_orange, bad_grape, bad_mango, bad_pear, bad_pineapple, bad_watermelon, bad_lemon, bad_carrot, bad_potato, bad_tomato, bad_broccoli, bad_cucumber, bad_eggplant, bad_bellpaper, gun, warrocket, handbomb]
+food_list = ["apple", "banana", "strawberry", "orange", "grape", "pineapple"]
+food_list.sort()
+
+
