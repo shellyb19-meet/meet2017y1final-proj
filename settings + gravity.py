@@ -3,6 +3,9 @@
 import turtle
 import random
 turtle.tracer(1,0)
+score_frame = turte.clone()
+score_frame.shape("rectangle")
+score_frame.color("orange")
 
 score = 0
 x_size=800
