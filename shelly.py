@@ -61,60 +61,136 @@ def farmer():
     turtle.listen()
 
 
-###changing shape
-###a = the names of all the items
-##happy = turtle.clone()
-##sad = turtle.clone()
-##happy.register_shape("happy_face.gif")
-##sad.register_shape("sad_face.gif")
+#changing shape
+#a = the names of all the items
+happy = turtle.clone()
+sad = turtle.clone()
+happy.register_shape("happy_face.gif")
+sad.register_shape("sad_face.gif")
+
+a = ["apple.gif", "banana.gif", "strawberry.gif", "orange.gif", "grape.gif"]
+
+a.sort()
+
+clones_list = []
+for n in range(len(a)):
+    obj = turtle.clone()
+    clones_list.append(obj)
+    turtle.register_shape(a[n])
+    obj.shape(a[n])
+
+
+
+good_food_turtles
+good_food_names
+
+bad_food_turtles
+bad_food_names
+
+other_stuff_turtles
+other_stuff_names
+
+#good food
+for good_food in clones_list:
+    if good_food.pos() == farmer.pos():
+        score = score + 1
+        happy.stamp()
+        print("Yay!")
+
+#bad food
+for bad_food in clones_list:
+    if bad_food.pos() == farmer.pos():
+        score = score - 1
+        sad.stamp()
+        print("Oh no!")
+
+#hit the edge
+for good_food in clones_list:
+    if good_food.pos()>=RIGHT_EDGE:
+        score = score - 1
+        sad.stamp()
+        print("Oh no!")
+
+#other stuff
+for other_stuff in clones_list:
+    if other_stuff.pos() == farmer.pos():
+        print("Game over!")
+        quit()
+=======
+#changing shape
+#a = the names of all the items
+happy = turtle.clone()
+sad = turtle.clone()
+happy.register_shape("happy_face.gif")
+sad.register_shape("sad_face.gif")
+
+a = ["apple.gif", "banana.gif", "strawberry.gif", "orange.gif", "grape.gif"]
+b = ["bad_apple.gif", "bad_banana.gif", "bad_strawberry.gif", "bad_orange.gif"
+     , "bad_grape.gif"]
+c = ["gun.gif", "handbomb.gif", "rocket.gif", "soldjier.gif"]
+
+a.sort()
+b.sort()
+c.sort()
+
+bad_clones_list = []
+good_clones_list = []
+war_clones_list = []
+
+for n in range(len(a)):
+    good_obj = turtle.clone()
+    good_clones_list.append(good_obj)
+    turtle.register_shape(a[n])
+    good_obj.shape(a[n])
+
+for x in range(len(b)):
+    bad_obj = turtle.clone()
+    bad_clones_list.append(bad_obj)
+    turtle.register_shape(b[x])
+    bad_obj.shape(b[x])
+
+for y in range(len(c)):
+    war_obj = turtle.clone()
+    war_clones_list.append(war_obj)
+    turtle.register_shape(c[y])
+    war_obj.shape(c[y])
+
+
+
+##good_food_turtles
+##good_food_names
+
 ##
-##a = ["apple.gif", "banana.gif", "strawberry.gif", "orange.gif", "grape.gif"]
 ##
-##a.sort()
-##
-##clones_list = []
-##for n in range(len(a)):
-##    obj = turtle.clone()
-##    clones_list.append(obj)
-##    turtle.register_shape(a[n])
-##    obj.shape(a[n])
-##
-##
-##
-####good_food_turtles
-####good_food_names
-####
-####bad_food_turtles
-####bad_food_names
-####
-####other_stuff_turtles
-####other_stuff_names
-##
-###good food
-##for good_food in clones_list:
-##    if good_food.pos() == farmer.pos():
-##        score = score + 1
-##        happy.stamp()
-##        print("Yay!")
-##
-###bad food
-##for bad_food in clones_list:
-##    if bad_food.pos() == farmer.pos():
-##        score = score - 1
-##        sad.stamp()
-##        print("Oh no!")
-##
-###hit the edge
-##for good_food in clones_list:
-##    if good_food.pos()>=RIGHT_EDGE:
-##        score = score - 1
-##        sad.stamp()
-##        print("Oh no!")
-##
-###other stuff
-##for other_stuff in clones_list:
-##    if other_stuff.pos() == farmer.pos():
-##        print("Game over!")
-##        quit()
-##
-##
+
+##other_stuff_turtles
+##other_stuff_names
+
+#good food
+for good_food in good_clones_list:
+    if good_food.pos() == farmer.pos():
+        score = score + 1
+        happy.stamp()
+        print("Yay!")
+
+#bad food
+for bad_food in bad_clones_list:
+    if bad_food.pos() == farmer.pos():
+        score = score - 1
+        sad.stamp()
+        print("Oh no!")
+
+#hit the edge
+for good_food in good_clones_list:
+    if good_food.pos()>=RIGHT_EDGE:
+        score = score - 1
+        sad.stamp()
+        print("Oh no!")
+
+#other stuff
+for other_stuff in war_clones_list:
+    if other_stuff.pos() == farmer.pos():
+        print("Game over!")
+        quit()
+
+
