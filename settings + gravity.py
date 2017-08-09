@@ -3,10 +3,6 @@
 import turtle
 import random
 turtle.tracer(1,0)
-score_frame = turte.clone()
-score_frame.shape("rectangle")
-score_frame.color("orange")
-scor_frame.goto
 score = 0
 x_size=800
 y_size=700
@@ -17,9 +13,9 @@ farmer_xsize = 50
 farmer_ysize = 50
 farmer_xpos = farmer.pos()[0]
 farmer_ypos = farmer.pos()[1]
-farmer_xpos_list = [farmer_xpos, farmer_xpos + farmer_xsize\2, farmer_xpos - farmer_xsize\2]
-farmer_ypos_list = [farmer_ypos, farmer_ypos + farmer_ysize\2, farmer_ypos - farmer_ysize\2]
-ground = -750
+farmer_xpos_list = [farmer_xpos, farmer_xpos + farmer_xsize/2, farmer_xpos - farmer_xsize/2]
+farmer_ypos_list = [farmer_ypos, farmer_ypos + farmer_ysize/2, farmer_ypos - farmer_ysize/2]
+ground = -650
 
 good_food_names = ["apple", "banana", "strawberry", "orange", "grape"]
 good_food_clones = []
@@ -66,67 +62,54 @@ sad.goto()
 sad.hideturtle()
 
 # ---------------------------------------------------------------------------------------
-def farmer():
-    turtle.hideturtle()
-    turtle.register_shape("farmer.gif")
-    farmer=turtle.clone()
-    farmer.shape("farmer.gif")
-
-    farmer.penup()
-    farmer.goto(0,-320)
-    farmer.showturtle()
-
-    LEFT_ARROW="Left"
-    RIGHT_ARROW="Right"
-    LEFT=0
-    RIGHT=1
+LEFT_ARROW="Left"
+RIGHT_ARROW="Right"
+LEFT=0
+RIGHT=1
+direction=LEFT
+def left():
+    global direction
     direction=LEFT
-
-    RIGHT_EDGE = 400
-    LEFT_EDGE = -400
-    RIGHT_EDGE = 350
-    LEFT_EDGE = -350
-
-    def left():
-        
-        global direction
-        direction=LEFT
-        move_farmer()
-        print('you moved the farmer left')
+    move_farmer()
+    print('you moved the farmer left')
         
         
-    def right():
-        
-        global direction
-        direction=RIGHT
-        move_farmer()
-        print('you moved the farmer right')
+def right():
+    global direction
+    direction=RIGHT
+    move_farmer()
+    print('you moved the farmer right')
         
 
-    def move_farmer():
-        x=farmer.pos()[0]
-        y=farmer.pos()[1]
+def move_farmer():
+    global farmer_xpos_list
+    global farmer_ypos_list
+    global farmer_xpos
+    global farmer_ypos
+    
+    x=farmer.pos()[0]
+    y=farmer.pos()[1]
         
-        if direction == LEFT:
-            farmer.goto(x-SQUARE_SIZE,y)
-            farmer_xpos = farmer.pos()[0]
-            farmer_ypos = farmer.pos()[1]
-            farmer_xpos_list = [farmer_xpos, farmer_xpos + farmer_xsize\2, farmer_xpos - farmer_xsize\2]
-            farmer_ypos_list = [farmer_ypos, farmer_ypos + farmer_ysize\2, farmer_ypos - farmer_ysize\2]
-        elif direction == RIGHT:
-            farmer.goto(x+SQUARE_SIZE,y)
-            farmer_xpos = farmer.pos()[0]
-            farmer_ypos = farmer.pos()[1]
-            farmer_xpos_list = [farmer_xpos, farmer_xpos + farmer_xsize\2, farmer_xpos - farmer_xsize\2]
-            farmer_ypos_list = [farmer_ypos, farmer_ypos + farmer_ysize\2, farmer_ypos - farmer_ysize\2]
-        if x>RIGHT_EDGE:
-            quit()
-        elif x<LEFT_EDGE:
-            quit()
+    if direction == LEFT:
+        farmer.goto(x-SQUARE_SIZE,y)
+        farmer_xpos = farmer.pos()[0]
+        farmer_ypos = farmer.pos()[1]
+        farmer_xpos_list = [farmer_xpos, farmer_xpos + farmer_xsize/2, farmer_xpos - (farmer_xsize/2)]
+        farmer_ypos_list = [farmer_ypos, farmer_ypos + farmer_ysize/2, farmer_ypos - (farmer_ysize/2)]
+    elif direction == RIGHT:
+        farmer.goto(x+SQUARE_SIZE,y)
+        farmer_xpos = farmer.pos()[0]
+        farmer_ypos = farmer.pos()[1]
+        farmer_xpos_list = [farmer_xpos, farmer_xpos + farmer_xsize/2, farmer_xpos - farmer_xsize/2]
+        farmer_ypos_list = [farmer_ypos, farmer_ypos + farmer_ysize/2, farmer_ypos - farmer_ysize/2]
+        
 
-    turtle.onkeypress(left,LEFT_ARROW)
-    turtle.onkeypress(right,RIGHT_ARROW)
-    turtle.listen()
+turtle.onkeypress(left,LEFT_ARROW)
+turtle.onkeypress(right,RIGHT_ARROW)
+turtle.listen()
+
+
+   
 # ---------------------------------------------------------------------------------------
 
 """
@@ -136,16 +119,39 @@ def farmer():
     2a. If it touches the farmer: ###
     2b. If it touches the ground: ###
 """
+def set_up_sky_stuff():
+    # choose which items are going to fall
+    chosen_fallen_item = []
+    max_falling_items = 1
+    for n in range(max_falling_items):
+        r = random.randint(1, 3)
+        if r == 1: # get a good food
+            good_i = random.randint(0, len(good_food_names) - 1)
+            good_food = good_food_clones[good_i]
+            chosen_fallen_item.append(good_food)
+        elif r == 2: # get a bad food
+            bad_i = random.randint(0, len(bad_food_names) - 1)
+            bad_food = bad_food_clones[bad_i]
+            chosen_fallen_item.append(bad_food)
+        else: # get a war item
+            other_i = random.randint(0, len(other_names) - 1)
+            other = other_clones[other_i]
+            chosen_fallen_item.append(other)
+
+def make_food():
+    min_x=-int(size_x/2/square_size)+1
+    max_x=int(size_x/2/square_size)-1
+    food_x=random.randint(min_x,max_x)*square_size
+    food_y=350
+    chosen_fallen_item.goto(food_x,food_y)
+    food_pos.append((food_x,food_y))
+    f= chosen_fallen_item.stamp()
+    food_stamp.append (f)
+
 
 
     
-##def rain():
-##    upto = len(fallen_items)
-##    chosen_fallen_item_num = random_randint(0,upto)
-##    chosen_fallen_item = fallen_items_list.index(chosen_fallen_item_num)
-##
-##    rx = random.randint(size_x - 0.5*size_x, (size_x - 0.5*size_x)*-1)
-##    chosen_fallen_item.goto(rx, size_y - 0.5*size_y)
+
 #gravity
     while not chosen_fallen_item_xpos in farmer_xpos_list and not chosen_fallen_item_ypos in farmer_ypos_list :
         chosen_fallen_item_xpos =    chosen_fallen_item.pos()[0]

@@ -112,8 +112,6 @@ set_up_sky_stuff()
 def make_food():
     min_x=-int(size_x/2/square_size)+1
     max_x=int(size_x/2/square_size)-1
-##    min_y=-int(size_y/2/square_size)+1
-##    max_y=int(size_y/2/square_size)-1
     food_x=random.randint(min_x,max_x)*square_size
     food_y=350
     chosen_fallen_item.goto(food_x,food_y)
