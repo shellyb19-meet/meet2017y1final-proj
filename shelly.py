@@ -118,7 +118,6 @@ for other_stuff in clones_list:
         quit()
 =======
 #changing shape
-#a = the names of all the items
 happy = turtle.clone()
 sad = turtle.clone()
 happy.register_shape("happy_face.gif")
