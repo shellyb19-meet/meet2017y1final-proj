@@ -4,6 +4,7 @@ import turtle
 import random
 turtle.tracer(1,0)
 
+score = 0
 x_size=800
 y_size=700
 turtle.setup(x_size,y_size)
