@@ -7,20 +7,24 @@ size_x = 800
 size_y = 700
 turtle.setup(size_x,size_y)
 square_size = 20
-food_list = ['apple','banana','strawberry', 'orange', 'grape', 'pineapple']
-bad_food_list = ["badapple.gif", "badbanana.gif"]
-fallen_items = ['apple.gif','banana.gif','strawberry.gif', 'orange.gif', 'grape.gif', 'pineapple.gif', "badapple.gif", "badbanana.gif"]
+good_food = ["apple.gif", "banana.gif", "strawberry.gif", "orange.gif", "grape.gif"]
+good_food_clone=[]
+bad_food = ["bad_apple.gif", "bad_banana.gif", "bad_strawberry.gif", "bad_orange.gif"]
+bad_food_clone=[]
+war_items = ["gun", "handbomb", "rocket", "soldjier"]
+war_items_clone=[]
+
 food_clones = []
 
-r = random.randint(0, len(fallen_items) - 1)
-random_thing = fallen_items[r]
+r = random.randint(0, len(war_items) - 1)
+random_thing = war_items[r]
 rx = random.randint(-390,390)
-fallen_item.goto(rx, 300)
-fallen_item.showturtle()
+war_items.goto(rx, 300)
+war_items.showturtle()
 farmer_xpos = farmer.pos()[0]
 farmer_ypos = farmer.pos()[1]
-fallen_item_xpos = fallen_item.pos()[0]
-fallen_item_ypos = fallen_item.pos()[1]
+fallen_item_xpos = c.pos()[0]
+fallen_item_ypos = c.pos()[1]
 
 
 ##down_edge = -350
@@ -33,12 +37,12 @@ fallen_item_ypos = fallen_item.pos()[1]
 
 
 
-for n in range(len(food_list)):
+for n in range(len(a)):
 ##    turtle.register_shape(food_list[n])
     obj = turtle.clone()
     obj.hideturtle()
     food_clones.append(obj)
-    obj.shape(food_list[n])
+    obj.shape(a[n])
 
 def set_up(food_clones):
     """
