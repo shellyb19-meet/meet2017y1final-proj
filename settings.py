@@ -20,6 +20,10 @@ a = ["apple", "banana", "strawberry", "orange", "grape"]
 b = ["bad_apple", "bad_banana", "bad_strawberry", "bad_orange"
      , "bad_grape"]
 c = ["gun", "handbomb", "rocket", "soldier"]
+for i in range(len(good_food_list)):
+   good_food_list.index(i) = turtle.clone()
+for i in range(len(bad_food_list)):
+   bad_food_list.index(i) = turtle.clone()
 fallen_items = bad_food_list + good_food_list 
 farmer_xpos =farmer.pos()[0]
 farmer_ypos = farmer.pos()[1]
