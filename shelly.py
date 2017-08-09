@@ -69,15 +69,35 @@ happy.register_shape("happy_face.gif")
 sad.register_shape("sad_face.gif")
 
 a = ["apple.gif", "banana.gif", "strawberry.gif", "orange.gif", "grape.gif"]
+b = ["bad_apple.gif", "bad_banana.gif", "bad_strawberry.gif", "bad_orange.gif"
+     , "bad_grape.gif"]
+c = ["gun.gif", "handbomb.gif", "rocket.gif", "soldjier.gif"]
 
 a.sort()
+b.sort()
+c.sort()
 
-clones_list = []
+bad_clones_list = []
+good_clones_list = []
+war_clones_list = []
+
 for n in range(len(a)):
-    obj = turtle.clone()
-    clones_list.append(obj)
+    good_obj = turtle.clone()
+    good_clones_list.append(good_obj)
     turtle.register_shape(a[n])
-    obj.shape(a[n])
+    good_obj.shape(a[n])
+
+for x in range(len(b)):
+    bad_obj = turtle.clone()
+    bad_clones_list.append(bad_obj)
+    turtle.register_shape(b[x])
+    bad_obj.shape(b[x])
+
+for y in range(len(c)):
+    war_obj = turtle.clone()
+    war_clones_list.append(war_obj)
+    turtle.register_shape(c[y])
+    war_obj.shape(c[y])
 
 
 
@@ -91,28 +111,28 @@ for n in range(len(a)):
 ##other_stuff_names
 
 #good food
-for good_food in clones_list:
+for good_food in good_clones_list:
     if good_food.pos() == farmer.pos():
         score = score + 1
         happy.stamp()
         print("Yay!")
 
 #bad food
-for bad_food in clones_list:
+for bad_food in bad_clones_list:
     if bad_food.pos() == farmer.pos():
         score = score - 1
         sad.stamp()
         print("Oh no!")
 
 #hit the edge
-for good_food in clones_list:
+for good_food in good_clones_list:
     if good_food.pos()>=RIGHT_EDGE:
         score = score - 1
         sad.stamp()
         print("Oh no!")
 
 #other stuff
-for other_stuff in clones_list:
+for other_stuff in war_clones_list:
     if other_stuff.pos() == farmer.pos():
         print("Game over!")
         quit()
