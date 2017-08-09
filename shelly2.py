@@ -1,11 +1,20 @@
 import turtle
-a = ["apple", "banana", "strawberry", "orange", "grape"]
+import random
+turtle.tracer(1,0)
 
-a.sort()
+x_size=800
+y_size=700
+turtle.setup(x_size,y_size)
+turtle.penup()
+turtle.goto(300,325)
 
-clones_list = []
-for n in range(len(a)):
-    obj = turtle.clone()
-    clones_list.append(obj)
-    turtle.register_shape(a[n])
-    obj.shape(a[n])
+##happy = turtle.clone()
+###sad = turtle.clone()
+##happy.register_shape("happy_face.gif")
+###sad.register_shape("sad_face.gif")
+##happy.penup()
+##happy.goto(400, 350)
+##happy.hideturtle()
+####sad.penup()
+####sad.goto()
+####sad.hideturtle()
