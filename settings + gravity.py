@@ -17,7 +17,7 @@ good_food_names = ["apple", "banana", "strawberry", "orange", "grape"]
 good_food_clones = []
 bad_food_names = ["bad_apple", "bad_banana", "bad_strawberry", "bad_orange", "bad_grape"]
 bad_food_clones = []
-other_names = ["gun", "handbomb", "rocket", "soldier"]
+other_names = ["gun", "handbomb", "rocket"]
 other_clones = []
 
 turtle.hideturtle()
@@ -78,7 +78,10 @@ for i in range(len(other_names)):
 def touching_farmer ():
     chosen_fallen_item.hideturtle()
     print("You have collected food!")
+    score = score + 1
+    happy.showturtle()
 
 def touching_ground ():
     chosen_Fallen_item.hideturtle|()
-    print("You missed food!")
+    print("You have missed food!")
+    sad.showturtle()
