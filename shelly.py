@@ -156,16 +156,6 @@ for y in range(len(c)):
     war_obj.shape(c[y])
 
 
-
-##good_food_turtles
-##good_food_names
-
-##
-##
-
-##other_stuff_turtles
-##other_stuff_names
-
 #good food
 for good_food in good_clones_list:
     if good_food.pos() == farmer.pos():
