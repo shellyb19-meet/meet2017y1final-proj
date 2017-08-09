@@ -10,8 +10,12 @@ y_size=700
 turtle.setup(x_size,y_size)
 SQUARE_SIZE=20
 farmer = turtle.clone()
-##farmer_xsize = 100
-##farmer_ysize = 100
+farmer_xsize = 50
+farmer_ysize = 50
+farmer_xpos = farmer.pos()[0]
+farmer_ypos = farmer.pos()[1]
+farmer_xpos_list = [farmer_xpos, farmer_xpos + farmer_xsize\2, farmer_xpos - farmer_xsize\2]
+farmer_ypos_list = [farmer_ypos, farmer_ypos + farmer_ysize\2, farmer_ypos - farmer_ysize\2]
 ground = -750
 
 good_food_names = ["apple", "banana", "strawberry", "orange", "grape"]
@@ -86,7 +90,7 @@ def farmer():
         direction=LEFT
         move_farmer()
         print('you moved the farmer left')
-        print(farmer.pos())
+        
         
     def right():
         
@@ -94,7 +98,7 @@ def farmer():
         direction=RIGHT
         move_farmer()
         print('you moved the farmer right')
-        print(farmer.pos())
+        
 
     def move_farmer():
         x=farmer.pos()[0]
@@ -102,8 +106,16 @@ def farmer():
         
         if direction == LEFT:
             farmer.goto(x-SQUARE_SIZE,y)
+            farmer_xpos = farmer.pos()[0]
+            farmer_ypos = farmer.pos()[1]
+            farmer_xpos_list = [farmer_xpos, farmer_xpos + farmer_xsize\2, farmer_xpos - farmer_xsize\2]
+            farmer_ypos_list = [farmer_ypos, farmer_ypos + farmer_ysize\2, farmer_ypos - farmer_ysize\2]
         elif direction == RIGHT:
             farmer.goto(x+SQUARE_SIZE,y)
+            farmer_xpos = farmer.pos()[0]
+            farmer_ypos = farmer.pos()[1]
+            farmer_xpos_list = [farmer_xpos, farmer_xpos + farmer_xsize\2, farmer_xpos - farmer_xsize\2]
+            farmer_ypos_list = [farmer_ypos, farmer_ypos + farmer_ysize\2, farmer_ypos - farmer_ysize\2]
         if x>RIGHT_EDGE:
             quit()
         elif x<LEFT_EDGE:
@@ -147,15 +159,17 @@ def touching_farmer ():
         chosen_fallen_item.hideturtle()
         print("You have collected food!")
         score = score + 1
+        score()
         happy.showturtle()
     elif chosen_fallen_item in bad_food_names:
         chosen_fallen_item.hideturtle()
         print("You have collected the worng food!")
         score = score - 1
+        score()
         sad.showturtle()
     else:
         chosen_fallen_item.hideturtle()
-        print("You have collected the worng item!")
+        print("You have collected deadly item!")
         sad.showturtle()
         quit()        
         
@@ -169,8 +183,16 @@ def touching_ground ():
         chosen_fallen_item.hideturtle()
     else:
         chosen_fallen_item.hideturtle()
-        
-## if score<=-10:
-##     quit()
+
+def score():
+    score.turtle.clone()
+    score.color("White")
+    score.hideturtle()
+    score.pu()
+    score.goto(300,325)
+    score.write("score:" + str(score), font=("Aerial",24, "normal") )
+    if score < 0:
+        quit()
+
      
    
