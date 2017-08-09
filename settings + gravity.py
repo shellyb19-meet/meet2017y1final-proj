@@ -6,7 +6,7 @@ turtle.tracer(1,0)
 score_frame = turte.clone()
 score_frame.shape("rectangle")
 score_frame.color("orange")
-
+scor_frame.goto
 score = 0
 x_size=800
 y_size=700
@@ -59,10 +59,10 @@ sad = turtle.clone()
 happy.register_shape("happy_face.gif")
 sad.register_shape("sad_face.gif")
 happy.penup()
-happy.goto(-350,300)
+happy.goto()
 happy.hideturtle()
 sad.penup()
-sad.goto(-350,300)
+sad.goto()
 sad.hideturtle()
 
 # ---------------------------------------------------------------------------------------
@@ -158,13 +158,13 @@ def farmer():
             touching_farmer()
 
 def touching_farmer ():
-    if chosen_fallen_item in good_food_clones:
+    if chosen_fallen_item in good_food_names:
         chosen_fallen_item.hideturtle()
         print("You have collected food!")
         score = score + 1
         score()
         happy.showturtle()
-    elif chosen_fallen_item in bad_food_clones:
+    elif chosen_fallen_item in bad_food_names:
         chosen_fallen_item.hideturtle()
         print("You have collected the worng food!")
         score = score - 1
@@ -178,11 +178,11 @@ def touching_farmer ():
         
 
 def touching_ground ():
-    if chosen_fallen_item in good_food_clones:
+    if chosen_fallen_item in good_food_names:
         chosen_fallen_item.hideturtle|()
         print("You have missed food!")
         sad.showturtle()
-    elif chosen_fallen_item in bad_food_clones:
+    elif chosen_fallen_item in bad_food_names:
         chosen_fallen_item.hideturtle()
     else:
         chosen_fallen_item.hideturtle()
