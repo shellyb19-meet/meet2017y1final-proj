@@ -31,11 +31,11 @@ for i in range(len(good_food_names)):
 
 # make bad_food_clones list
 for i in range(len(bad_food_names)):
-   obj2 = turtle.clone()
+   obj1 = turtle.clone()
    shape_name = bad_food_names[i] + ".gif"
    turtle.register_shape(shape_name)
-   obj2.shape(shape_name)
-   bad_food_clones.append(obj2)
+   obj1.shape(shape_name)
+   bad_food_clones.append(obj1)
 
 # make other_clones list
 for i in range(len(other_names)):
@@ -45,6 +45,72 @@ for i in range(len(other_names)):
    obj2.shape(shape_name)
    other_clones.append(obj2)
 
+#make face
+happy = turtle.clone()
+sad = turtle.clone()
+happy.register_shape("happy_face.gif")
+sad.register_shape("sad_face.gif")
+happy.penup()
+happy.goto()
+happy.hideturtle()
+sad.penup()
+sad.goto()
+sad.hideturtle()
+
+# ---------------------------------------------------------------------------------------
+def farmer():
+    turtle.hideturtle()
+    turtle.register_shape("farmer.gif")
+    farmer=turtle.clone()
+    farmer.shape("farmer.gif")
+
+    farmer.penup()
+    farmer.goto(0,-320)
+    farmer.showturtle()
+
+    LEFT_ARROW="Left"
+    RIGHT_ARROW="Right"
+    LEFT=0
+    RIGHT=1
+    direction=LEFT
+
+    RIGHT_EDGE = 400
+    LEFT_EDGE = -400
+    RIGHT_EDGE = 350
+    LEFT_EDGE = -350
+
+    def left():
+        
+        global direction
+        direction=LEFT
+        move_farmer()
+        print('you moved the farmer left')
+        print(farmer.pos())
+        
+    def right():
+        
+        global direction
+        direction=RIGHT
+        move_farmer()
+        print('you moved the farmer right')
+        print(farmer.pos())
+
+    def move_farmer():
+        x=farmer.pos()[0]
+        y=farmer.pos()[1]
+        
+        if direction == LEFT:
+            farmer.goto(x-SQUARE_SIZE,y)
+        elif direction == RIGHT:
+            farmer.goto(x+SQUARE_SIZE,y)
+        if x>RIGHT_EDGE:
+            quit()
+        elif x<LEFT_EDGE:
+            quit()
+
+    turtle.onkeypress(left,LEFT_ARROW)
+    turtle.onkeypress(right,RIGHT_ARROW)
+    turtle.listen()
 # ---------------------------------------------------------------------------------------
 
 """
@@ -76,12 +142,34 @@ for i in range(len(other_names)):
             touching_farmer()
 
 def touching_farmer ():
-    chosen_fallen_item.hideturtle()
-    print("You have collected food!")
-    score = score + 1
-    happy.showturtle()
+    if chosen_fallen_item in good_food_names:
+        chosen_fallen_item.hideturtle()
+        print("You have collected food!")
+        score = score + 1
+        happy.showturtle()
+    elif chosen_fallen_item in bad_food_names:
+        chosen_fallen_item.hideturtle()
+        print("You have collected the worng food!")
+        score = score - 1
+        sad.showturtle()
+    else:
+        chosen_fallen_item.hideturtle()
+        print("You have collected the worng item!")
+        sad.showturtle()
+        quit()        
+        
 
 def touching_ground ():
-    chosen_Fallen_item.hideturtle|()
-    print("You have missed food!")
-    sad.showturtle()
+    if chosen_fallen_item in good_food_names:
+        chosen_fallen_item.hideturtle|()
+        print("You have missed food!")
+        sad.showturtle()
+    elif chosen_fallen_item in bad_food_names:
+        chosen_fallen_item.hideturtle()
+    else:
+        chosen_fallen_item.hideturtle()
+        
+## if score<=-10:
+##     quit()
+     
+   
