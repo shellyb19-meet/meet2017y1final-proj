@@ -147,7 +147,15 @@ def make_food():
     food_pos.append((food_x,food_y))
     f= chosen_fallen_item.stamp()
     food_stamp.append (f)
-
+    while not chosen_fallen_item_xpos in farmer_xpos_list and not chosen_fallen_item_ypos in farmer_ypos_list :
+        chosen_fallen_item_xpos =    chosen_fallen_item.pos()[0]
+        chosen_fallen_item_ypos = chosen_fallen_item.pos()[1]
+        chosen_fallen_item_ypos += -20
+        chosen_fallen_item.goto(chosen_fallen_item_xpos, chosen_fallen_item_ypos)
+        if chosen_fallen_item_ypos <= ground:
+            touching_ground()
+        if chosen_fallen_item_xpos in farmer_xpos_list and not chosen_fallen_item_ypos in farmer_ypos_list :
+            touching_farmer()
 
 
     
