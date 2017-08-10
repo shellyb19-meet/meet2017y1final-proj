@@ -8,7 +8,20 @@ x_size=800
 y_size=700
 turtle.setup(x_size,y_size)
 SQUARE_SIZE=20
+
+#background
+background = turtle.clone()
+turtle.register_shape("background.gif")
+background.shape("background.gif")
+background.penup()
+background.goto(0,0)
+background.stamp()
+background.hideturtle()
+
+#farmer
 farmer = turtle.clone()
+turtle.register_shape("farmer.gif")
+farmer.shape("farmer.gif")
 farmer_xsize = 50
 farmer_ysize = 50
 farmer_xpos = farmer.pos()[0]
@@ -16,6 +29,10 @@ farmer_ypos = farmer.pos()[1]
 farmer_xpos_list = [farmer_xpos, farmer_xpos + farmer_xsize/2, farmer_xpos - farmer_xsize/2]
 farmer_ypos_list = [farmer_ypos, farmer_ypos + farmer_ysize/2, farmer_ypos - farmer_ysize/2]
 ground = -650
+
+farmer.penup()
+farmer.goto(0,-320)
+farmer.showturtle()
 
 good_food_names = ["apple", "banana", "strawberry", "orange", "grape"]
 good_food_clones = []
@@ -52,8 +69,10 @@ for i in range(len(other_names)):
 #make face
 happy = turtle.clone()
 sad = turtle.clone()
-happy.register_shape("happy_face.gif")
-sad.register_shape("sad_face.gif")
+turtle.register_shape("happy_face.gif")
+turtle.register_shape("sad_face.gif")
+happy.shape("happy_face.gif")
+sad.shape("sad_face.gif")
 happy.penup()
 happy.goto()
 happy.hideturtle()
@@ -61,52 +80,102 @@ sad.penup()
 sad.goto()
 sad.hideturtle()
 
-# ---------------------------------------------------------------------------------------
-LEFT_ARROW="Left"
-RIGHT_ARROW="Right"
-LEFT=0
-RIGHT=1
-direction=LEFT
+# --------------------------------------------------------------------------------------
+LEFT_ARROW = "Left"
+RIGHT_ARROW = "Right"
+
+LEFT = 0 
+RIGHT = 1
+
+RIGHT_EDGE = 200
+LEFT_EDGE = -200
+RIGHT_EDGE = 380
+LEFT_EDGE = -380
+direction = LEFT
+
 def left():
     global direction
     direction=LEFT
-    move_farmer()
-    print('you moved the farmer left')
-        
-        
+##    move_farmer()
+##    if direction == LEFT:
+##        farmer.goto(x-SQUARE_SIZE,y)
+##        print('you moved the farmer laft')
+##        print(farmer.pos())
+    
 def right():
     global direction
     direction=RIGHT
-    move_farmer()
-    print('you moved the farmer right')
-        
-
-def move_farmer():
-    global farmer_xpos_list
-    global farmer_ypos_list
-    global farmer_xpos
-    global farmer_ypos
-    
-    x=farmer.pos()[0]
-    y=farmer.pos()[1]
-        
-    if direction == LEFT:
-        farmer.goto(x-SQUARE_SIZE,y)
-        farmer_xpos = farmer.pos()[0]
-        farmer_ypos = farmer.pos()[1]
-        farmer_xpos_list = [farmer_xpos, farmer_xpos + farmer_xsize/2, farmer_xpos - (farmer_xsize/2)]
-        farmer_ypos_list = [farmer_ypos, farmer_ypos + farmer_ysize/2, farmer_ypos - (farmer_ysize/2)]
-    elif direction == RIGHT:
-        farmer.goto(x+SQUARE_SIZE,y)
-        farmer_xpos = farmer.pos()[0]
-        farmer_ypos = farmer.pos()[1]
-        farmer_xpos_list = [farmer_xpos, farmer_xpos + farmer_xsize/2, farmer_xpos - farmer_xsize/2]
-        farmer_ypos_list = [farmer_ypos, farmer_ypos + farmer_ysize/2, farmer_ypos - farmer_ysize/2]
-        
+##    move_farmer()
+##    if direction == RIGHT:
+##        farmer.goto(x+SQUARE_SIZE,y)
+##        print('you moved the farmer right')
+##        print(farmer.pos())
 
 turtle.onkeypress(left,LEFT_ARROW)
 turtle.onkeypress(right,RIGHT_ARROW)
 turtle.listen()
+
+def move_farmer():
+    x=farmer.pos()[0]
+    y=farmer.pos()[1]
+    
+    if direction == LEFT:
+        farmer.goto(x-SQUARE_SIZE,y)
+    else:
+        farmer.goto(x+SQUARE_SIZE,y)
+
+    if x>RIGHT_EDGE:
+        quit()
+    if x<LEFT_EDGE:
+        quit()
+
+
+move_farmer()
+##LEFT_ARROW="Left"
+##RIGHT_ARROW="Right"
+##LEFT=0
+##RIGHT=1
+##direction=LEFT
+##def left():
+##    global direction
+##    direction=LEFT
+##    move_farmer()
+##    print('you moved the farmer left')
+##        
+##        
+##def right():
+##    global direction
+##    direction=RIGHT
+##    move_farmer()
+##    print('you moved the farmer right')
+##        
+##
+##def move_farmer():
+##    global farmer_xpos_list
+##    global farmer_ypos_list
+##    global farmer_xpos
+##    global farmer_ypos
+##    
+##    x=farmer.pos()[0]
+##    y=farmer.pos()[1]
+##        
+##    if direction == LEFT:
+##        farmer.goto(x-SQUARE_SIZE,y)
+##        farmer_xpos = farmer.pos()[0]
+##        farmer_ypos = farmer.pos()[1]
+##        farmer_xpos_list = [farmer_xpos, farmer_xpos + farmer_xsize/2, farmer_xpos - (farmer_xsize/2)]
+##        farmer_ypos_list = [farmer_ypos, farmer_ypos + farmer_ysize/2, farmer_ypos - (farmer_ysize/2)]
+##    elif direction == RIGHT:
+##        farmer.goto(x+SQUARE_SIZE,y)
+##        farmer_xpos = farmer.pos()[0]
+##        farmer_ypos = farmer.pos()[1]
+##        farmer_xpos_list = [farmer_xpos, farmer_xpos + farmer_xsize/2, farmer_xpos - farmer_xsize/2]
+##        farmer_ypos_list = [farmer_ypos, farmer_ypos + farmer_ysize/2, farmer_ypos - farmer_ysize/2]
+##        
+##
+##turtle.onkeypress(left,LEFT_ARROW)
+##turtle.onkeypress(right,RIGHT_ARROW)
+##turtle.listen()
 
 
    
