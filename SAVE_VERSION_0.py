@@ -8,6 +8,15 @@ x_size=800
 y_size=700
 turtle.setup(x_size,y_size)
 SQUARE_SIZE=20
+
+background = turtle.clone()
+turtle.register_shape("background.gif")
+background.shape("background.gif")
+background.penup()
+background.goto(0,0)
+background.stamp()
+background.hideturtle()
+
 turtle.register_shape("farmer.gif")
 farmer=turtle.clone()
 farmer.shape("farmer.gif")
