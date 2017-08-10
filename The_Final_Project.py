@@ -2,12 +2,13 @@
 
 import turtle
 import random
-##turtle.tracer(1,0)
+turtle.tracer(1,0)
 scorevalue = 0
 x_size=800
 y_size=700
 turtle.setup(x_size,y_size)
 SQUARE_SIZE=20
+TIME_STEP = 100
 
 background = turtle.clone()
 turtle.register_shape("background.gif")
@@ -19,7 +20,11 @@ background.hideturtle()
 
 turtle.register_shape("farmer.gif")
 farmer=turtle.clone()
+farmer.hideturtle()
+farmer.pu()
+farmer.goto(0,-300)
 farmer.shape("farmer.gif")
+farmer.showturtle()
 farmer.pu()
 farmer_xsize = 50
 farmer_ysize = 50
@@ -80,6 +85,7 @@ RIGHT_ARROW="Right"
 LEFT=0
 RIGHT=1
 direction=LEFT
+
 def left():
     global direction
     direction=LEFT
@@ -102,20 +108,21 @@ def move_farmer():
     
     x=farmer.pos()[0]
     y=farmer.pos()[1]
-        
+
     if direction == LEFT:
-        farmer.goto(x-SQUARE_SIZE*5,y)
+        farmer.goto(x-SQUARE_SIZE,y)
         farmer_xpos = farmer.pos()[0]
         farmer_ypos = farmer.pos()[1]
-        farmer_xpos_list = [farmer_xpos, farmer_xpos + SQUARE_SIZE, farmer_xpos + 2*SQUARE_SIZE, farmer_xpos - SQUARE_SIZE, farmer_xpos - 2*SQUARE_SIZE]
-        farmer_ypos_list = [farmer_ypos, farmer_ypos + SQUARE_SIZE, farmer_ypos + 2*SQUARE_SIZE, farmer_ypos - SQUARE_SIZE, farmer_ypos - 2*SQUARE_SIZE]
+##        farmer_xpos_list = [farmer_xpos, farmer_xpos + SQUARE_SIZE, farmer_xpos + 2*SQUARE_SIZE, farmer_xpos - SQUARE_SIZE, farmer_xpos - 2*SQUARE_SIZE]
+##        farmer_ypos_list = [farmer_ypos, farmer_ypos + SQUARE_SIZE, farmer_ypos + 2*SQUARE_SIZE, farmer_ypos - SQUARE_SIZE, farmer_ypos - 2*SQUARE_SIZE]
+        farmer_xpos_list = [farmer_xpos, farmer_xpos + farmer_xsize/2, farmer_xpos - farmer_xsize/2]
+        farmer_ypos_list = [farmer_ypos, farmer_ypos + farmer_ysize/2, farmer_ypos - farmer_ysize/2]
     elif direction == RIGHT:
-        farmer.goto(x+SQUARE_SIZE*5,y)
+        farmer.goto(x+SQUARE_SIZE,y)
         farmer_xpos = farmer.pos()[0]
         farmer_ypos = farmer.pos()[1]
         farmer_xpos_list = [farmer_xpos, farmer_xpos + farmer_xsize/2, farmer_xpos - farmer_xsize/2]
         farmer_ypos_list = [farmer_ypos, farmer_ypos + farmer_ysize/2, farmer_ypos - farmer_ysize/2]
-        
 
 scoreboard=turtle.clone()
 scoreboard.color("Black")
@@ -158,7 +165,8 @@ def make_food():
     max_x=int(x_size/2/SQUARE_SIZE)-1
     food_x=random.randint(min_x,max_x)*SQUARE_SIZE
     food_y=350
-    temp_list = chosen_fallen_item[:]
+    #temp_list = chosen_fallen_item[:]
+    temp_list = [chosen_fallen_item[-1]]
     print(temp_list)
     for chosen_fall_item in temp_list:
         chosen_fall_item.goto(food_x,food_y)
@@ -168,18 +176,33 @@ def make_food():
         #food_pos.append((food_x,food_y))
         #f= chosen_fall_item.stamp()
         #food_stamp.append (f)
-        while not chosen_fallen_item_xpos in farmer_xpos_list and not chosen_fallen_item_ypos in farmer_ypos_list :
-            chosen_fallen_item_xpos =    chosen_fall_item.pos()[0]
-            chosen_fallen_item_ypos = chosen_fall_item.pos()[1]
-            chosen_fallen_item_ypos += -20
-            chosen_fall_item.goto(chosen_fallen_item_xpos, chosen_fallen_item_ypos)
-            if chosen_fallen_item_ypos <= ground:
-                touching_ground(chosen_fall_item)
-                break
-            elif chosen_fallen_item_xpos in farmer_xpos_list and not chosen_fallen_item_ypos in farmer_ypos_list :
-                touching_farmer(chosen_fall_item)
-                break
-    turtle.ontimer(make_food,200)
+##        while not chosen_fallen_item_xpos in farmer_xpos_list and not chosen_fallen_item_ypos in farmer_ypos_list :
+##            chosen_fallen_item_xpos =    chosen_fall_item.pos()[0]
+##            chosen_fallen_item_ypos = chosen_fall_item.pos()[1]
+##            chosen_fallen_item_ypos += -20
+##            chosen_fall_item.goto(chosen_fallen_item_xpos, chosen_fallen_item_ypos)
+##            if chosen_fallen_item_ypos <= ground:
+##                touching_ground(chosen_fall_item)
+##                break
+##            elif chosen_fallen_item_xpos in farmer_xpos_list and not chosen_fallen_item_ypos in farmer_ypos_list :
+##                touching_farmer(chosen_fall_item)
+##                break
+    #turtle.ontimer(make_food,TIME_STEP)
+            
+def fall():
+    for item in chosen_fallen_item:
+        item_x = item.pos()[0]
+        item_y = item.pos()[1]
+        print(item.pos())
+        if item_y <= ground:
+            touching_ground(item)
+            make_food()
+        if farmer_xpos_list[2] <= item_x <= farmer_xpos_list[1] and farmer_ypos_list[2] <= item_y <= farmer_ypos_list[1]:
+            touching_farmer(item)
+            make_food()
+        else:
+            item.goto(item_x,item_y-40)
+    turtle.ontimer(fall,TIME_STEP)
             
 def touching_farmer (chosen_fall_item):
     global scorevalue, chosen_fallen_item
@@ -234,3 +257,4 @@ def touching_ground (chosen_fall_item):
 
 
 make_food()
+fall()
