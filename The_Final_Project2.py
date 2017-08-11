@@ -237,6 +237,9 @@ def touching_farmer (chosen_fall_item):
         score()
         sad.showturtle()
         happy.hideturtle()
+
+        hearts.clearstamp(hearts_stamp_list[-1])
+        hearts_stamp_list.pop(len(hearts_stamp_list) - 1)
     else:
         chosen_fall_item.hideturtle()
         ind = chosen_fallen_item.index(chosen_fall_item)
@@ -245,8 +248,25 @@ def touching_farmer (chosen_fall_item):
         sad.showturtle()
         happy.hideturtle()
         quit()        
-        
 
+turtle.register_shape("heart.gif")
+hearts = turtle.clone()
+hearts.shape("heart.gif")
+hearts.st()
+hearts.goto(x_size/2 - 60, y_size/2 - 80)
+
+hearts_stamp_list = []
+
+def createHearts():
+    count = 60
+    for i in range(5):
+        hearts.goto(x_size/2 - count, y_size/2 - 80)
+        heartStamp = hearts.stamp()
+        hearts_stamp_list.append(heartStamp)
+        count += 40
+        
+    hearts.goto(190000, 10000)
+        
 def touching_ground (chosen_fall_item):
     global scorevalue, chosen_fallen_item
     print(chosen_fallen_item)
@@ -255,6 +275,9 @@ def touching_ground (chosen_fall_item):
         chosen_fall_item.hideturtle()
         ind = chosen_fallen_item.index(chosen_fall_item)
         chosen_fallen_item.pop(ind)
+
+        hearts.clearstamp(hearts_stamp_list[-1])
+        hearts_stamp_list.pop(len(hearts_stamp_list) - 1)
         print("You have missed food!")
         sad.showturtle()
     elif chosen_fall_item in bad_food_clones:
@@ -266,7 +289,10 @@ def touching_ground (chosen_fall_item):
         ind = chosen_fallen_item.index(chosen_fall_item)
         chosen_fallen_item.pop(ind)
 
+    if len(hearts_stamp_list) == 0:
+        quit()
 
 make_food()
 move_farmer()
 fall()
+createHearts()
